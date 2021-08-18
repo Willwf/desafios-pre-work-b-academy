@@ -1,4 +1,4 @@
-# Desafio do dia 01
+# Desafio do dia 01 / RESOLVIDO ✔
 
 ## Setup
 
