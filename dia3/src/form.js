@@ -16,6 +16,44 @@ nameInput.addEventListener("input", (event) => {
       }
     })
     .join(" ");
+});
 
-  console.log(names);
+const form = document.querySelector("#form");
+
+const colorLabel = document.createElement("label");
+form.appendChild(colorLabel);
+colorLabel.setAttribute("for", "color-select");
+colorLabel.textContent = "Selecione uma ou várias cores";
+
+const colorSelector = document.createElement("select");
+form.appendChild(colorSelector);
+colorSelector.setAttribute("id", "color-select");
+colorSelector.setAttribute("name", "colors");
+colorSelector.setAttribute("Multiple", "");
+
+const colors = ["red", "green", "yellow", "blue", "orange"];
+colors.map((color) => {
+  const colorOption = document.createElement("option");
+  colorSelector.appendChild(colorOption);
+  colorOption.textContent = color;
+  colorOption.value = color;
+});
+
+const colorsContainer = document.createElement("div");
+document.body.appendChild(colorsContainer);
+
+colorSelector.addEventListener("input", (event) => {
+  colorsContainer.innerHTML = "";
+
+  const selectedColors = [...event.target.selectedOptions].map(
+    (color) => color.value
+  );
+
+  selectedColors.map((color) => {
+    const colorDivSquare = document.createElement("div");
+    colorsContainer.appendChild(colorDivSquare);
+    colorDivSquare.style.width = "100px";
+    colorDivSquare.style.height = "100px";
+    colorDivSquare.style.backgroundColor = `${color}`;
+  });
 });
