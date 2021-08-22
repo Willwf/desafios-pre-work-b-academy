@@ -17,6 +17,33 @@
         data-js="name"
       />
     </form>
+    <div id="carDiv">
+      <form action="" data-js="carForm">
+        <label for="image">Imagem (URL)</label>
+        <input type="text" name="image" id="image" />
+        <label for="model">Marca / Modelo</label>
+        <input type="text" name="model" id="model" />
+        <label for="year">Ano</label>
+        <input type="text" name="year" id="year" />
+        <label for="plate">Placa</label>
+        <input type="text" name="plate" id="plate" />
+        <label for="color">Cor</label>
+        <input type="color" name="color" id="color" />
+        <input type="submit" value="Enviar" />
+      </form>
+      <table data-js="carTable" border="1">
+        <thead>
+          <tr>
+            <th>Imagem (URL)</th>
+            <th>Marca / Modelo</th>
+            <th>Ano</th>
+            <th>Placa</th>
+            <th>Cor</th>
+          </tr>
+        </thead>
+        <tbody data-js="carTableBody"></tbody>
+      </table>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
