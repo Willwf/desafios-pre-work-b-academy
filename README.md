@@ -2,6 +2,6 @@
 
 Resolução dos desafios propostos na semana do pré-work do B. Academy
 
-Todos os vídeos estão [no canal do Daciuk na Twitch](https://twitch.tv/fdaciuk), e ficarão disponíveis até o final do dia 22/08/2021.
+Todos os vídeos estão [nesta página do Notion](https://fdaciuk.notion.site/Bootcamp-React-js-B-Academy-04beed6c0dda4b79a28709b0f4cf6042), junto do link das aulas do bootcamp.
 
-Para visualizar os vídeos da semana de pré-work, acesse o link acima, clique na aba "Videos" e encontre a playlist "Pré-work (Bootcamp React.js)". Todos os vídeos estarão disponíveis lá :D
+Há também o link para os repositórios da solução dos desafios propostos.

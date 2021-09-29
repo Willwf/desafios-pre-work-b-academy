@@ -7,7 +7,9 @@
   margin-top: 60px;
 }
 
-form {
+/* Formulário de Cores */
+
+#colorDiv {
   margin-bottom: 60px;
 }
 
@@ -15,6 +17,23 @@ label {
   display: block;
 }
 
+.colorsContainer {
+  display: flex;
+  gap: 15px;
+
+  margin-top: 15px;
+}
+
+input#name {
+  margin-bottom: 15px;
+}
+
+/* Formulário de Carros */
+
 #carDiv {
   display: flex;
+}
+
+[data-js="carForm"] {
+  margin-right: 15px;
 }

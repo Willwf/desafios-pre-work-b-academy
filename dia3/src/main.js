@@ -1,3 +1,3 @@
 import "./style.css";
-import "./form";
+import "./colorForm";
 import "./cars";

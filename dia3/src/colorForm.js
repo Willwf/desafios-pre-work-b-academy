@@ -18,15 +18,16 @@ nameInput.addEventListener("input", (event) => {
     .join(" ");
 });
 
-const form = document.querySelector("#form");
+const colorForm = document.querySelector("#colorForm");
+const colorDiv = document.querySelector("#colorDiv");
 
 const colorLabel = document.createElement("label");
-form.appendChild(colorLabel);
+colorForm.appendChild(colorLabel);
 colorLabel.setAttribute("for", "color-select");
 colorLabel.textContent = "Selecione uma ou várias cores";
 
 const colorSelector = document.createElement("select");
-form.appendChild(colorSelector);
+colorForm.appendChild(colorSelector);
 colorSelector.setAttribute("id", "color-select");
 colorSelector.setAttribute("name", "colors");
 colorSelector.setAttribute("Multiple", "");
@@ -40,7 +41,8 @@ colors.map((color) => {
 });
 
 const colorsContainer = document.createElement("div");
-document.body.appendChild(colorsContainer);
+colorsContainer.classList.add("colorsContainer");
+colorDiv.appendChild(colorsContainer);
 
 colorSelector.addEventListener("input", (event) => {
   colorsContainer.innerHTML = "";
