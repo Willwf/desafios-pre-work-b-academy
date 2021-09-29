@@ -20,7 +20,20 @@ form.addEventListener("submit", (event) => {
 
   elements.forEach((element) => {
     const td = document.createElement("td");
-    td.textContent = element.value;
+    if (element === image) {
+      const carImage = document.createElement("img");
+      td.appendChild(carImage);
+      carImage.style.width = "100px";
+      carImage.src = `${element.value}`;
+    } else if (element === color) {
+      const carColorSquare = document.createElement("div");
+      td.appendChild(carColorSquare);
+      carColorSquare.style.width = "100px";
+      carColorSquare.style.height = "100px";
+      carColorSquare.style.backgroundColor = `${element.value}`;
+    } else {
+      td.textContent = element.value;
+    }
     tr.appendChild(td);
   });
 
