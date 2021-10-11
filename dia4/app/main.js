@@ -19,19 +19,46 @@ form.addEventListener("submit", (event) => {
 
   const elements = [image, brandModel, year, plate, color];
 
-  const tr = document.createElement("tr");
-
-  table.appendChild(tr);
+  createTableRow(elements);
 
   form.reset();
   image.focus();
 });
 
+function createTableRow(carElements) {
+  if (table.querySelector(".noCars")) {
+    table.innerHTML = "";
+  }
+
+  const tr = document.createElement("tr");
+
+  carElements.forEach((car) => {
+    const td = document.createElement("td");
+    if (car === image) {
+      const carImage = document.createElement("img");
+      td.appendChild(carImage);
+      carImage.style.width = "100px";
+      carImage.src = `${car.value}`;
+    } else if (car === color) {
+      const carColorSquare = document.createElement("div");
+      td.appendChild(carColorSquare);
+      carColorSquare.style.width = "100px";
+      carColorSquare.style.height = "100px";
+      carColorSquare.style.backgroundColor = `${car.value}`;
+    } else {
+      td.textContent = car.value;
+    }
+    tr.appendChild(td);
+  });
+
+  table.appendChild(tr);
+}
+
 function main() {
   fetch(url)
     .then((res) => res.json())
-    .then((data) => {
-      if (data.length === 0) {
+    .then((carArray) => {
+      if (carArray.length === 0) {
         const tr = document.createElement("tr");
         const td = document.createElement("td");
 
@@ -39,27 +66,12 @@ function main() {
         tr.appendChild(td);
         td.setAttribute("colspan", "5");
         td.setAttribute("align", "center");
+        td.classList.add("noCars");
         table.appendChild(tr);
+        return;
       }
 
-      data.forEach((car) => {
-        const td = document.createElement("td");
-        if (car === image) {
-          const carImage = document.createElement("img");
-          td.appendChild(carImage);
-          carImage.style.width = "100px";
-          carImage.src = `${car.value}`;
-        } else if (car === color) {
-          const carColorSquare = document.createElement("div");
-          td.appendChild(carColorSquare);
-          carColorSquare.style.width = "100px";
-          carColorSquare.style.height = "100px";
-          carColorSquare.style.backgroundColor = `${car.value}`;
-        } else {
-          td.textContent = car.value;
-        }
-        tr.appendChild(td);
-      });
+      createTableRow(carArray);
     });
 }
 
