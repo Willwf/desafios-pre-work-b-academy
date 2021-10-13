@@ -93,22 +93,31 @@ function createTableRow(data) {
   table.appendChild(tr);
 }
 
-function deleteRow(event) {
-  const car = { plate: event.target.dataset.plate };
-  const carRow = document.querySelector(`[data-plate="${car.plate}"]`);
-  carRow.parentNode.removeChild(carRow);
+async function deleteRow(event) {
+  const button = event.target;
+  const plate = button.dataset.plate;
+  const carRow = document.querySelector(`[data-plate="${plate}"]`);
 
-  fetch(url, {
+  const result = await fetch(url, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(car),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((res) => console.log(res.message));
+    body: JSON.stringify({ plate }),
+  });
+
+  if (result.error) {
+    console.log("Erro ao excluir:", result.message);
+    return;
+  }
+
+  carRow.parentNode.removeChild(carRow);
+  button.removeEventListener("click", deleteRow);
+
+  const trs = table.querySelector("tr");
+  if (!trs) {
+    noCarRow();
+  }
 }
 
 function noCarRow() {
