@@ -58,6 +58,7 @@ function createTableRow(data) {
     { type: "string", value: data.year },
     { type: "string", value: data.plate },
     { type: "color", value: data.color },
+    { type: "delete", value: data.plate },
   ];
 
   const tr = document.createElement("tr");
@@ -76,6 +77,13 @@ function createTableRow(data) {
       carColorSquare.style.width = "100px";
       carColorSquare.style.height = "100px";
       carColorSquare.style.backgroundColor = `${car.value}`;
+    } else if (car.type === "delete") {
+      const delButton = document.createElement("button");
+      td.appendChild(delButton);
+      delButton.textContent = "Excluir";
+      tr.dataset.plate = car.value;
+      delButton.dataset.plate = car.value;
+      delButton.addEventListener("click", deleteRow);
     } else {
       td.textContent = car.value;
     }
@@ -85,21 +93,43 @@ function createTableRow(data) {
   table.appendChild(tr);
 }
 
+function deleteRow(event) {
+  const car = { plate: event.target.dataset.plate };
+  const carRow = document.querySelector(`[data-plate="${car.plate}"]`);
+  carRow.parentNode.removeChild(carRow);
+
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(car),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => console.log(res.message));
+}
+
+function noCarRow() {
+  const tr = document.createElement("tr");
+  const td = document.createElement("td");
+  const thsLength = document.querySelectorAll("table th").length;
+
+  td.textContent = "Nenhum carro encontrado";
+  tr.appendChild(td);
+  td.setAttribute("colspan", thsLength);
+  td.setAttribute("align", "center");
+  td.classList.add("noCars");
+  table.appendChild(tr);
+}
+
 function main() {
   fetch(url)
     .then((res) => res.json())
     .then((carArray) => {
       if (carArray.length === 0) {
-        const tr = document.createElement("tr");
-        const td = document.createElement("td");
-        const thsLength = document.querySelectorAll("table th").length;
-
-        td.textContent = "Nenhum carro encontrado";
-        tr.appendChild(td);
-        td.setAttribute("colspan", thsLength);
-        td.setAttribute("align", "center");
-        td.classList.add("noCars");
-        table.appendChild(tr);
+        noCarRow();
         return;
       }
 
